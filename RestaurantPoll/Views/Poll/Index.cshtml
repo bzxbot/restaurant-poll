@@ -1,0 +1,59 @@
+﻿@using RestaurantPoll.Models
+@model RestaurantPoll.Models.Poll
+@{
+    ViewBag.Title = "Poll";
+    var voted = Model.GetCurrentDay().HasUserVoted((User)Session["user"]);
+    var htmlAttributes = new Dictionary<string, object>();
+    if (voted) 
+    { 
+        htmlAttributes.Add("disabled", "disabled");
+    }
+}
+
+<div class="jumbotron" style="color: #ababab; width: 40rem;">
+    <div class="container">
+        <p style="text-align: left; font-size: 15px;">@Poll.GetPollDay().ToShortDateString()</p>
+        <span class="glyphicon glyphicon-list-alt"></span>
+        <h2>Onde vamos almoçar hoje?</h2>
+        <div class="box">
+            <form method="post" action="@Url.Action("Vote", "Poll")">
+                @foreach (Restaurant res in Model.GetCurrentDay().Restaurants)
+                {
+                    <p>
+                        <label>
+                            @Html.RadioButton("restaurantId", res.Id, htmlAttributes)
+                            @res.Name
+                        </label>
+                    </p>
+                }
+                @if (voted)
+                {
+                    <button class="btn btn-default full-width" disabled="disabled"><span class="glyphicon glyphicon-remove"></span></button>
+                }
+                else
+                {
+                    <button id="voteSubmitButton" class="btn btn-primary full-width"><span class="glyphicon glyphicon-ok"></span></button>
+                }  
+            </form>
+        </div>
+        <h2 style="margin-bottom: 1rem;">Histórico</h2>
+        <div class="box" style="font-size: 15px; text-align: left">
+            <p>Segunda-feira: @Model.GetMondayResult().Name
+                (@Model.GetMondayResult().Votes)
+            </p>
+            <p>Terça-feira: @Model.GetTuesdayResult().Name
+                (@Model.GetTuesdayResult().Votes)
+            </p>
+            <p>Quarta-feira: @Model.GetWednesdayResult().Name
+                (@Model.GetWednesdayResult().Votes)
+            </p>
+            <p>Quinta-feira: @Model.GetThursdayResult().Name
+                (@Model.GetThursdayResult().Votes)
+            </p>
+            <p>Sexta-feira: @Model.GetFridayResult().Name
+                (@Model.GetFridayResult().Votes)
+            </p>
+        </div>
+        <p style="text-align: right; font-size: 15px;">@Html.ActionLink("Avançar dia", "NextDay")</p>
+    </div>
+</div>

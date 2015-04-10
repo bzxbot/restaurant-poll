@@ -82,6 +82,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\DayTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\PollTest.cs" />
   </ItemGroup>

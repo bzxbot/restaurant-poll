@@ -86,17 +86,9 @@ namespace RestaurantPoll.Models
 
         public Day GetCurrentDay()
         {
-            Day day = null;
+            var day = Days.Find(d => d.Date == pollDay);
 
-            foreach (Day d in Days)
-            {
-                if (d.Date == pollDay)
-                {
-                    day = d;
-                }
-            }
-
-            SetRestaurantsForDay(day);
+            day.SetRestaurants();
 
             return day;
         }
@@ -116,41 +108,6 @@ namespace RestaurantPoll.Models
             week.Days.Add(thursday);
             week.Days.Add(friday);
             return week;
-        }
-
-        protected void SetRestaurantsForDay(Day day)
-        {
-            if(day.Restaurants.Count != 0)
-                return;
-
-            if (day.Date.DayOfWeek == DayOfWeek.Monday)
-            {
-                day.Restaurants = Restaurant.Restaurants;
-            }
-            else
-            {
-                // Três casos são tratados aqui:
-                // O primeiro, no caso do dia anterior não ter havido votação.
-                // O segundo, a votação estava disponível, mas não houve voto.
-                // O terceiro, quando houve voto e um restaurante é removido da lista.
-                var topVoted = day.Previous.GetHighestVoted();
-                if (topVoted == null && day.Previous.Restaurants.Count == 0)
-                {
-                    day.Restaurants = Restaurant.Restaurants;
-                }
-                else if (topVoted == null)
-                {
-                    day.Restaurants = day.Previous.Restaurants;
-                }
-                else
-                {
-                    // Remove o restaurante mais votado do dia anterior.
-                    var previousRestaurants = day.Previous.Restaurants;
-                    List<Restaurant> copyOfPrevious = new List<Restaurant>(previousRestaurants);
-                    copyOfPrevious.Remove(topVoted);
-                    day.Restaurants = copyOfPrevious;
-                }
-            }
         }
 
         protected static Poll FindPoll(DateTime date) 

@@ -27,5 +27,13 @@ namespace RestaurantPoll.Tests
             Assert.AreEqual(poll.Start, monday);
             Assert.AreEqual(poll.End, friday);
         }
+
+        [TestMethod]
+        public void GetPollDayTest()
+        {
+            DateTime pollDay = new DateTime(2015, 04, 08);
+            Poll.pollDay = pollDay;
+            Assert.AreEqual(Poll.GetPollDay(), pollDay);
+        }
     }
 }

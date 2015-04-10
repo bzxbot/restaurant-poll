@@ -23,7 +23,7 @@ namespace RestaurantPoll.Controllers
 
             if (user != null)
             {
-                this.session["user"] = user;
+                Session["user"] = user;
 
                 return RedirectToAction("Index", "Poll");
             }

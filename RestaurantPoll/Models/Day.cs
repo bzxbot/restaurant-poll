@@ -26,7 +26,8 @@ namespace RestaurantPoll.Models
 
         public void Vote(User user, Restaurant restaurant)
         {
-            Votes.Add(user, restaurant);
+            if (!HasUserVoted(user))
+                Votes.Add(user, restaurant);
         }
 
         public int GetHighestVotedCount()

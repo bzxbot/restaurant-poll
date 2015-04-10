@@ -3,11 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.SessionState;
 
 namespace RestaurantPoll.Controllers
 {
     public class UserController : Controller
     {
+        protected HttpSessionStateBase session;
+       
+        public UserController()
+        {
+            this.session = Session;
+        }
+
+        public UserController(HttpSessionStateBase session)
+        {
+            this.session = session;
+        }
+
         public ActionResult Login()
         {
             Session["user"] = null;
@@ -18,12 +31,11 @@ namespace RestaurantPoll.Controllers
         [HttpPost]
         public ActionResult Login(string email, string password)
         {
-            RestaurantPoll.Models.User user = 
-                RestaurantPoll.Models.User.GetAllUsers().Find(u => u.Email == email && u.Password == password);
+            var user = RestaurantPoll.Models.User.Authenticate(email, password);
 
             if (user != null)
             {
-                Session["user"] = user;
+                this.session["user"] = user;
 
                 return RedirectToAction("Index", "Poll");
             }

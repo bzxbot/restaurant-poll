@@ -26,6 +26,14 @@ namespace RestaurantPoll.Models
             Users.Add(jose);
         }
 
+        public static RestaurantPoll.Models.User Authenticate(string email, string password)
+        {
+            RestaurantPoll.Models.User user =
+                RestaurantPoll.Models.User.GetAllUsers().Find(u => u.Email == email && u.Password == password);
+
+            return user;
+        }
+
         public int Id { get; private set; }
         public string Email { get; private set; }
         public string Password { get; private set; }

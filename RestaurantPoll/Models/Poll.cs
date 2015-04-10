@@ -11,8 +11,8 @@ namespace RestaurantPoll.Models
         public DateTime End { get; private set; }
         public List<Day> Days { get; private set; }
 
-        private static DateTime pollDay = DateTime.Now.Date;
-        private static List<Poll> polls = new List<Poll>();
+        protected static DateTime pollDay = DateTime.Now.Date;
+        protected static List<Poll> polls = new List<Poll>();
 
         public Poll()
         {
@@ -23,7 +23,7 @@ namespace RestaurantPoll.Models
         {
             Poll poll = FindPoll(pollDay);
 
-            // Not found, let's create it.
+            // Votação não encontrada, criando uma nova.
             if (poll == null)
             {
                 poll = CreatePoll(pollDay);
@@ -118,7 +118,7 @@ namespace RestaurantPoll.Models
             return week;
         }
 
-        public void SetRestaurantsForDay(Day day)
+        protected void SetRestaurantsForDay(Day day)
         {
             if(day.Restaurants.Count != 0)
                 return;
@@ -129,7 +129,10 @@ namespace RestaurantPoll.Models
             }
             else
             {
-                // Remove top voted.
+                // Três casos são tratados aqui:
+                // O primeiro, no caso do dia anterior não ter havido votação.
+                // O segundo, a votação estava disponível, mas não houve voto.
+                // O terceiro, quando houve voto e um restaurante é removido da lista.
                 var topVoted = day.Previous.GetHighestVoted();
                 if (topVoted == null && day.Previous.Restaurants.Count == 0)
                 {
@@ -141,6 +144,7 @@ namespace RestaurantPoll.Models
                 }
                 else
                 {
+                    // Remove o restaurante mais votado do dia anterior.
                     var previousRestaurants = day.Previous.Restaurants;
                     List<Restaurant> copyOfPrevious = new List<Restaurant>(previousRestaurants);
                     copyOfPrevious.Remove(topVoted);
@@ -149,12 +153,7 @@ namespace RestaurantPoll.Models
             }
         }
 
-        public static bool IsValidDay(DateTime dateTime)
-        {
-            return !(dateTime.DayOfWeek == DayOfWeek.Saturday || dateTime.DayOfWeek == DayOfWeek.Sunday);
-        }
-
-        public static Poll FindPoll(DateTime date) 
+        protected static Poll FindPoll(DateTime date) 
         {
             foreach (Poll week in polls)
             {
@@ -167,7 +166,7 @@ namespace RestaurantPoll.Models
             return null;
         }
 
-        private static Poll SetWeekDates(Poll week, DateTime dateTime)
+        protected static Poll SetWeekDates(Poll week, DateTime dateTime)
         {
             int delta = DayOfWeek.Monday - dateTime.DayOfWeek;
             week.Start = dateTime.Date.AddDays(delta);            

@@ -12,11 +12,6 @@ namespace RestaurantPoll.Controllers
         [RestaurantPoll.Filters.Authorize]
         public ActionResult Index()
         {
-            if (!Poll.IsValidDay(DateTime.Now))
-            {
-                return View("Dia de almoçar em casa!");
-            }
-
             return View(Poll.FindOrCreatePoll());
         }
 
@@ -25,11 +20,10 @@ namespace RestaurantPoll.Controllers
         public ActionResult Vote(int restaurantId = -1)
         {
             var day = Poll.FindOrCreatePoll().GetCurrentDay();
-            var user = (User)Session["user"];
-            if (!day.HasUserVoted(user) && restaurantId != -1)
+            if (restaurantId != -1)
             {
-                Restaurant restaurant = Restaurant.Restaurants.Where(r => r.Id == restaurantId).First();
-                day.Vote(user, restaurant);
+                var restaurant = Restaurant.Restaurants.Where(r => r.Id == restaurantId).First();
+                day.Vote((User)Session["user"], restaurant);
             }
             return RedirectToAction("Index");
         }

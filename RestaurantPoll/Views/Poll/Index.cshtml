@@ -8,6 +8,11 @@
     { 
         htmlAttributes.Add("disabled", "disabled");
     }
+    var monday = @Model.GetMondayResult();
+    var tuesday = @Model.GetTuesdayResult();
+    var wednesday = @Model.GetWednesdayResult();
+    var thursday = @Model.GetThursdayResult();
+    var friday = @Model.GetFridayResult();
 }
 
 <div class="jumbotron" style="color: #ababab; width: 40rem;">
@@ -38,22 +43,22 @@
         </div>
         <h2 style="margin-bottom: 1rem;">Histórico</h2>
         <div class="box" style="font-size: 15px; text-align: left">
-            <p>Segunda-feira: @Model.GetMondayResult().Name
-                (@Model.GetMondayResult().Votes)
+            <p>Segunda-feira: @monday.Name
+                (@monday.Votes)
             </p>
-            <p>Terça-feira: @Model.GetTuesdayResult().Name
-                (@Model.GetTuesdayResult().Votes)
+            <p>Terça-feira: @tuesday.Name
+                (@tuesday.Votes)
             </p>
-            <p>Quarta-feira: @Model.GetWednesdayResult().Name
-                (@Model.GetWednesdayResult().Votes)
+            <p>Quarta-feira: @wednesday.Name
+                (@wednesday.Votes)
             </p>
-            <p>Quinta-feira: @Model.GetThursdayResult().Name
-                (@Model.GetThursdayResult().Votes)
+            <p>Quinta-feira: @thursday.Name
+                (@thursday.Votes)
             </p>
-            <p>Sexta-feira: @Model.GetFridayResult().Name
-                (@Model.GetFridayResult().Votes)
+            <p>Sexta-feira: @friday.Name
+                (@friday.Votes)
             </p>
         </div>
-        <p style="text-align: right; font-size: 15px;">@Html.ActionLink("Avançar dia", "NextDay")</p>
+        <p style="text-align: right; font-size: 15px;">@Html.ActionLink("Ir para o próximo dia", "NextDay")</p>
     </div>
 </div>

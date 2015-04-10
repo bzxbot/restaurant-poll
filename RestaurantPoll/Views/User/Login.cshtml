@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+
+<div class="jumbotron">
+    <div class="container">
+        <span class="glyphicon glyphicon-list-alt"></span>
+        <h2>Restaurant Poll</h2>
+        <div class="box">
+            <form id="loginForm" method="post" action="@Url.Action("Login","User")">
+                <input id="email" name="email" type="text" placeholder="E-mail" class="fields" />
+                <input id="password" name="password" type="password" placeholder="Senha" class="fields" />
+                <button id="loginFormSubmit" class="btn btn-primary full-width"><span class="glyphicon glyphicon-ok"></span></button>
+                <span style="color: #ababab; font-size: 19px;">@ViewBag.Message</span>
+            </form>
+        </div>
+    </div>
+</div>

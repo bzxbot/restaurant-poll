@@ -9,18 +9,6 @@ namespace RestaurantPoll.Controllers
 {
     public class UserController : Controller
     {
-        protected HttpSessionStateBase session;
-       
-        public UserController()
-        {
-            this.session = Session;
-        }
-
-        public UserController(HttpSessionStateBase session)
-        {
-            this.session = session;
-        }
-
         public ActionResult Login()
         {
             Session["user"] = null;

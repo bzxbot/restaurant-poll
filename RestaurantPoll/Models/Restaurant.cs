@@ -14,9 +14,15 @@ namespace RestaurantPoll.Models
             // Criação da lista de restaurantes padrão do sistema.
             var panorama = new Restaurant(1, "Panorama");
             var intervalo = new Restaurant(2, "Intervalo 50");
+            var ru = new Restaurant(3, "Restaurante Universitário");
+            var bar15 = new Restaurant(4, "Bar 15");
+            var barDaFamecos = new Restaurant(5, "Bar da Famecos");
             Restaurants = new List<Restaurant>();
             Restaurants.Add(panorama);
             Restaurants.Add(intervalo);
+            Restaurants.Add(ru);
+            Restaurants.Add(bar15);
+            Restaurants.Add(barDaFamecos);
         }
 
         public int Id { get; private set; }

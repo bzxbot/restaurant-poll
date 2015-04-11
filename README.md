@@ -19,8 +19,8 @@ A interface do sistema foi desenvolvida utilizando Bootstrap.
 Para todos, a senha é "**db**", sem as aspas.
 
 O objetivo do formulário de login é apenas manter um registro dos votos nos restaurantes, e não criar um
-formulário de login seguro e robusto. Se esse fosse o caso, eu utilizaria os recursos prontos do ASP.NET MVC 5. Porém,
-como a orientação era a não utilização de um banco de dados, optei por uma versão light para autenticação.
+formulário de login seguro e robusto. Se esse fosse o caso, os recursos prontos do ASP.NET MVC 5 seria utilizados. Porém,
+como a orientação era a não utilização de um banco de dados, foi utilizada uma versão light para autenticação.
 
 Após a tela de login, é exibido uma lista com cinco restaurantes pré-cadastrados para que o usuário possa fazer sua escolha.
 
@@ -30,9 +30,9 @@ O sistema permite, para facilitar testes, que a data seja avançada para o próx
 
 Um ponto que não é esclarecido nos requisitos é qual o critério para desempate da votação.
 
-Como não é possível esclarer os requisitos, o sistema escolhe o primeiro restaurante com mais votos, de acordo com a estrutura interna do sistema.
+Como não é possível esclarecer os requisitos, o sistema escolhe o primeiro restaurante com mais votos, de acordo com a estrutura interna do sistema.
 
-Os testes unitários cobrem as 3 estórias, e mais alguns métodos imporantes do sistema.
+Os testes unitários cobrem as 3 estórias, e mais alguns métodos importantes do sistema.
 
 Instalação
 -------

@@ -11,8 +11,22 @@ namespace RestaurantPoll.Models
         public DateTime End { get; private set; }
         public List<Day> Days { get; private set; }
 
-        protected static DateTime pollDay = DateTime.Now.Date;
+        protected static DateTime pollDay;
         protected static List<Poll> polls = new List<Poll>();
+
+        static Poll()
+        {
+            pollDay = DateTime.Now.Date;
+
+            if (pollDay.DayOfWeek == DayOfWeek.Saturday)
+            {
+                pollDay.AddDays(1);
+            }
+            if (pollDay.DayOfWeek == DayOfWeek.Sunday)
+            {
+                pollDay.AddDays(1);
+            }
+        }
 
         public Poll()
         {

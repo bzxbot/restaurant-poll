@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 
 namespace RestaurantPoll.Models
@@ -17,9 +19,9 @@ namespace RestaurantPoll.Models
         static User()
         {
             // Criação da lista de usuários padrão do sistema.
-            var joao = new User(1, "joao@dbserver.com", "db");
-            var maria = new User(2, "maria@dbserver.com", "db");
-            var jose = new User(3, "jose@dbserver.com", "db");
+            var joao = new User(1, "joao@dbserver.com", GetHash("db"));
+            var maria = new User(2, "maria@dbserver.com", GetHash("db"));
+            var jose = new User(3, "jose@dbserver.com", GetHash("db"));
             Users = new List<User>();
             Users.Add(joao);
             Users.Add(maria);
@@ -29,9 +31,15 @@ namespace RestaurantPoll.Models
         public static RestaurantPoll.Models.User Authenticate(string email, string password)
         {
             RestaurantPoll.Models.User user =
-                RestaurantPoll.Models.User.GetAllUsers().Find(u => u.Email == email && u.Password == password);
+                RestaurantPoll.Models.User.GetAllUsers().Find(u => u.Email == email && u.Password == GetHash(password));
 
             return user;
+        }
+
+        public static string GetHash(string password)
+        {
+            HashAlgorithm algorithm = SHA1.Create();
+            return System.Convert.ToBase64String(algorithm.ComputeHash(Encoding.UTF8.GetBytes(password)));
         }
 
         public int Id { get; private set; }

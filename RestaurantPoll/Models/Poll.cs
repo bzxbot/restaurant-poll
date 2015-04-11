@@ -20,11 +20,11 @@ namespace RestaurantPoll.Models
 
             if (pollDay.DayOfWeek == DayOfWeek.Saturday)
             {
-                pollDay.AddDays(1);
+                pollDay = pollDay.AddDays(1);
             }
             if (pollDay.DayOfWeek == DayOfWeek.Sunday)
             {
-                pollDay.AddDays(1);
+                pollDay = pollDay.AddDays(1);
             }
         }
 

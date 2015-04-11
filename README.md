@@ -16,6 +16,8 @@ Os usuários criados por padrão são os seguintes:
 
 A interface do sistema foi desenvolvida utilizando Bootstrap.
 
+A interface e os estilos foram testados no Google Chrome.
+
 Para todos, a senha é "**db**", sem as aspas.
 
 O objetivo do formulário de login é apenas manter um registro dos votos nos restaurantes, e não criar um

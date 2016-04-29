@@ -1,7 +1,7 @@
 Restaurant Poll
 -------
 
-Um pequeno aplicativo para decidir onde realizar o almoço da DBServer.
+Um pequeno aplicativo para um grupo decidir onde ir almoçar.
 
 O aplicativo possui um formulário de login. O formulário de login, conforme instruções dos requisitos
 foi feito sem utilizar banco de dados. Os usuários são definidos quando a aplicação é executada na classe User.

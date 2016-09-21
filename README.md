@@ -8,11 +8,11 @@ foi feito sem utilizar banco de dados. Os usuários são definidos quando a apli
 
 Os usuários criados por padrão são os seguintes:
 
-> joao@dbserver.com
+> joao@example.com
  
-> maria@dbserver.com
+> maria@example.com
 
-> jose@dbserver.com
+> jose@example.com
 
 A interface do sistema foi desenvolvida utilizando Bootstrap.
 
@@ -26,15 +26,15 @@ como a orientação era a não utilização de um banco de dados, foi utilizada 
 
 Após a tela de login, é exibido uma lista com cinco restaurantes pré-cadastrados para que o usuário possa fazer sua escolha.
 
-A data padrão do sistema é sempre o dia atual. Como os requisitos não são claro, a semana só tem dias uteis, de segunda até sexta-feira.
+A data padrão do sistema é sempre o dia atual. Como os requisitos não são totalemnte claros, a semana só tem dias úteis, de segunda até sexta-feira.
 
-O sistema permite, para facilitar testes, que a data seja avançada para o próximo dia útil.
+O sistema permite, para facilitar os testes, que a data seja avançada para o próximo dia útil.
 
-Um ponto que não é esclarecido nos requisitos é qual o critério para desempate da votação.
+Um ponto que não é esclarecido nos requisitos é qual o critério para desempate da votação. 
 
-Como não é possível esclarecer os requisitos, o sistema escolhe o primeiro restaurante com mais votos, de acordo com a estrutura interna do sistema.
+Por isso, foi adotado o desempate por ordem alfabética.
 
-Os testes unitários cobrem as 3 estórias, e mais alguns métodos importantes do sistema.
+Os testes unitários cobrem as 3 histórias, e mais alguns métodos importantes do sistema.
 
 Instalação
 -------

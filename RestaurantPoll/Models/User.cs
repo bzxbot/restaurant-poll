@@ -16,9 +16,9 @@ namespace RestaurantPoll.Models
         static User()
         {
             // Criação da lista de usuários padrão do sistema.
-            var joao = new User(1, "joao@dbserver.com", GetHash("db"));
-            var maria = new User(2, "maria@dbserver.com", GetHash("db"));
-            var jose = new User(3, "jose@dbserver.com", GetHash("db"));
+            var joao = new User(1, "joao@example.com", GetHash("db"));
+            var maria = new User(2, "maria@example.com", GetHash("db"));
+            var jose = new User(3, "jose@example.com", GetHash("db"));
             Users = new List<User>();
             Users.Add(joao);
             Users.Add(maria);

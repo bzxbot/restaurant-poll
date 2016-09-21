@@ -22,6 +22,7 @@ namespace RestaurantPoll.Models
             {
                 pollDay = pollDay.AddDays(1);
             }
+
             if (pollDay.DayOfWeek == DayOfWeek.Sunday)
             {
                 pollDay = pollDay.AddDays(1);
@@ -35,7 +36,7 @@ namespace RestaurantPoll.Models
 
         public static Poll FindOrCreatePoll()
         {
-            Poll poll = FindPoll(pollDay);
+            var poll = FindPoll(pollDay);
 
             // Votação não encontrada, criando uma nova.
             if (poll == null)
@@ -87,10 +88,10 @@ namespace RestaurantPoll.Models
 
         public Result GetDayResult(DateTime date)
         {
-            Day day = Days.Find(d => d.Date == date);
-            Restaurant restaurant = day.GetHighestVoted();
-            int votes = day.GetHighestVotedCount();
-            Result result = new Result
+            var day = Days.Find(d => d.Date == date);
+            var restaurant = day.GetHighestVoted();
+            var votes = day.GetHighestVotedCount();
+            var result = new Result
             {
                 Name = restaurant != null ? restaurant.Name : "Nenhum resultado",
                 Votes = votes
@@ -109,13 +110,13 @@ namespace RestaurantPoll.Models
 
         protected static Poll CreatePoll(DateTime dayOfWeek)
         {
-            Poll week = new Poll();
+            var week = new Poll();
             SetWeekDates(week, dayOfWeek);
-            Day monday = new Day(week.Start, null);
-            Day tuesday = new Day(week.Start.AddDays(1), monday);
-            Day wednesday = new Day(week.Start.AddDays(2), tuesday);
-            Day thursday = new Day(week.Start.AddDays(3), wednesday);
-            Day friday = new Day(week.Start.AddDays(4), thursday);
+            var monday = new Day(week.Start, null);
+            var tuesday = new Day(week.Start.AddDays(1), monday);
+            var wednesday = new Day(week.Start.AddDays(2), tuesday);
+            var thursday = new Day(week.Start.AddDays(3), wednesday);
+            var friday = new Day(week.Start.AddDays(4), thursday);
             week.Days.Add(monday);
             week.Days.Add(tuesday);
             week.Days.Add(wednesday);
@@ -139,7 +140,7 @@ namespace RestaurantPoll.Models
 
         protected static Poll SetWeekDates(Poll week, DateTime dateTime)
         {
-            int delta = DayOfWeek.Monday - dateTime.DayOfWeek;
+            var delta = DayOfWeek.Monday - dateTime.DayOfWeek;
             week.Start = dateTime.Date.AddDays(delta);            
             delta = DayOfWeek.Friday - dateTime.DayOfWeek;
             week.End = dateTime.Date.AddDays(delta);

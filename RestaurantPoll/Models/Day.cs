@@ -7,6 +7,7 @@ namespace RestaurantPoll.Models
     public class Day
     {
         public List<Restaurant> Restaurants = new List<Restaurant>();
+
         public DateTime Date;
         public Day Previous { get; private set; }
         
@@ -37,6 +38,7 @@ namespace RestaurantPoll.Models
 
             var max = 0;
             Restaurant removed = null;
+
             foreach(Restaurant r in Restaurants)
             {
                 var count = Votes.Where(res => res.Value.Name == r.Name).ToList().Count;
